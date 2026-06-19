@@ -19,6 +19,16 @@ st.markdown("Interactive dashboard for Superstore sales analysis")
 # --------------------------------
 # Load Data
 # --------------------------------
+uploaded_file = st.file_uploader(
+    "upload Superstore CSV",
+    type=["csv"]
+)
+
+if uploaded_file is None:
+    st.info("please upload a CSV file to continue.")
+    st.stop()
+
+
 @st.cache_data(ttl=600)  # Cache data for 10 minutes
 def load_data():
     return pd.read_csv(
